@@ -50,6 +50,9 @@ body {
     /*align-self: center;*/
     font-size: 2.5em;
 }
+.fz72px {
+    font-size: 104px;
+}
 </style>
 </head>
 <body>
@@ -59,7 +62,7 @@ body {
       <div class="timer__column head v">До получения ключа</div>
       <div class="timer__column head vh">До печати</div>
       <div class="timer__column head vh">До окончания экзамена</div>
-      <div class="timer__column first-collum v">
+      <div class="timer__column days first-collum v">
         <span id="day">
           0
         </span>
@@ -67,7 +70,7 @@ body {
           Дней
         </span>
       </div>
-      <div class="timer__column">
+      <div class="timer__column days">
         <span id="hour">
           0
         </span>
@@ -75,7 +78,7 @@ body {
           Часов
         </span>
       </div>
-      <div class="timer__column">
+      <div class="timer__column days">
         <span id="min">
           0
         </span>
@@ -83,7 +86,7 @@ body {
           Минут
         </span>
       </div>
-      <div class="timer__column">
+      <div class="timer__column days">
         <span id="sec">
           0
         </span>
@@ -100,40 +103,63 @@ body {
 
 document.addEventListener("DOMContentLoaded",function(a){
 
- Timer();
+ Timer(TimeForKey);
 });
 
 
 //timer
-console.log('mifome')
-timeend= new Date(2020, 6, 16,9,30,0,0);
-// timeend= new Date(2020, 6, 16,10,0,0,0);
-// timeend= new Date(2020, 6, 16,14,14,11,0);
+// console.log('mifome')
+  TimeForKey = new Date(2020, 6, 16, 9, 30, 0,  0);
+TimeForPrint = new Date(2020, 6, 16, 9, 10, 0,  0);
+     TimeEnd = new Date(2020, 6, 16,14, 14, 11, 0);
+console.log('TimeEnd-TimeForPrint' + (TimeEnd-TimeForPrint))
+console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
+
  // time = new Date(year, month, date hours, minutes, seconds, ms)
 
-function Timer() {
+function Timer(TimeStart) {
   today = new Date();
   // console.log('today ' + today)
-  today = Math.floor((timeend-today)/1000);
-  if (today<0) {
+  today = Math.floor((TimeStart-today)/1000);
+  if (today<1) {
     return true;
   } else {
-  // console.log('today ' + today)
+  
   tsec=today%60;
+  console.log((TimeStart-today)%60000 + 'mifomen')
   today=Math.floor(today/60); 
+//   console.log('today' + today)
   // if(tsec<10)tsec='0'+tsec;
   tmin=today%60;
   today=Math.floor(today/60);
+ 
   // if(tmin<10)tmin='0'+tmin;
-  thour=today%24; 
-  today=Math.floor(today/24);
+    thour=today%24; 
+    today=Math.floor(today/24);
+    // console.log('TimeStart-today)%60' + ((TimeStart-today)%60))
+if ((TimeStart-today)%60==0) {
+    document.querySelector('.first-collum').classList.add('vh')
+    // document.querySelectorAll('.timer__column').style.fontSize = "148px";
 
+    // document.querySelectorAll('.days').classList.add('fz72px')
+    // for (i=0;i<=3;i++) {
+    //     document.querySelectorAll('.days')[i].classList.add('fz72px')
+    // }
+    document.querySelectorAll('.days').forEach(element => {
+        element.classList.add('fz72px')
+        
+    });
+    // for (i=0;i<=document.querySelectorAll('.days').length;i++) {
+// listdays[i].classList.add('fz72px")
+    // })
+} else {
 
-  document.getElementById('day').innerHTML=today;
+}
+   document.getElementById('day').innerHTML=today;
   document.getElementById('hour').innerHTML=thour;
-  document.getElementById('min').innerHTML=tmin;
-  document.getElementById('sec').innerHTML=tsec;
-  window.setTimeout("Timer()",1000);
+   document.getElementById('min').innerHTML=tmin;
+   document.getElementById('sec').innerHTML=tsec;
+  window.setTimeout("Timer(TimeForKey)",1000);
 }
   // if (day<0) break;
 }

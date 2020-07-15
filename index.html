@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EGE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="icon" 
+  type="image/png" 
+  href="img/tildafavicon.ico">
+<style>
+  .vh {
+  position:absolute!important;
+  clip:rect(1px 1px 1px 1px);
+  clip:  rect(1px,1px,1px,1px);
+  padding:0!important;
+  border:0!important;
+  height:1px!important;
+  width:1px!important;
+  overflow:hidden
+}
+body {
+  font-family: roboto,serif,tahoma;
+}
+.timer {
+  /*border:2px solid green;*/
+
+  display: flex;
+  justify-content: space-around;
+  padding: 5%;
+  font-size: 125%;
+  flex-wrap: wrap;
+}
+.head {
+  width: 100%;
+}
+.timer__column {
+  padding: 5%;
+    /*border:2px solid rgba(132,231,0,1);*/
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    /*align-self: center;*/
+    font-size: 2.5em;
+}
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="timer">
+      <div class="timer__column head v">До получения ключа</div>
+      <div class="timer__column head vh">До печати</div>
+      <div class="timer__column head vh">До окончания экзамена</div>
+      <div class="timer__column first-collum v">
+        <span id="day">
+          0
+        </span>
+        <span class="timer__description">
+          Дней
+        </span>
+      </div>
+      <div class="timer__column">
+        <span id="hour">
+          0
+        </span>
+        <span class="timer__description">
+          Часов
+        </span>
+      </div>
+      <div class="timer__column">
+        <span id="min">
+          0
+        </span>
+        <span class="timer__description">
+          Минут
+        </span>
+      </div>
+      <div class="timer__column">
+        <span id="sec">
+          0
+        </span>
+        <span class="timer__description">
+          Секунд
+        </span>
+      </div>
+    </section>
+
+  </header>
+
+  <script >
+    
+
+document.addEventListener("DOMContentLoaded",function(a){
+
+ Timer();
+});
+
+
+//timer
+console.log('mifome')
+timeend= new Date(2020, 6, 16,9,30,0,0);
+// timeend= new Date(2020, 6, 16,10,0,0,0);
+// timeend= new Date(2020, 6, 16,14,14,11,0);
+ // time = new Date(year, month, date hours, minutes, seconds, ms)
+
+function Timer() {
+  today = new Date();
+  // console.log('today ' + today)
+  today = Math.floor((timeend-today)/1000);
+  if (today<0) {
+    return true;
+  } else {
+  // console.log('today ' + today)
+  tsec=today%60;
+  today=Math.floor(today/60); 
+  // if(tsec<10)tsec='0'+tsec;
+  tmin=today%60;
+  today=Math.floor(today/60);
+  // if(tmin<10)tmin='0'+tmin;
+  thour=today%24; 
+  today=Math.floor(today/24);
+
+
+  document.getElementById('day').innerHTML=today;
+  document.getElementById('hour').innerHTML=thour;
+  document.getElementById('min').innerHTML=tmin;
+  document.getElementById('sec').innerHTML=tsec;
+  window.setTimeout("Timer()",1000);
+}
+  // if (day<0) break;
+}
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mifomen/timer.git"
+  },
+  "keywords": [
+    "timer"
+  ],
+  "author": "mifomen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mifomen/timer/issues"
+  },
+  "homepage": "https://github.com/mifomen/timer#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2"
+  }
+}

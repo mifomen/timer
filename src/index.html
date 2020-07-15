@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>EGE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="css/style.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="icon" 
-  type="image/png" 
-  href="img/tildafavicon.ico">
+  <link rel="icon" type="image/png" href="img/tildafavicon.ico">
   <style>
     .vh {
-      position:absolute!important;
-      clip:rect(1px 1px 1px 1px);
-      clip:  rect(1px,1px,1px,1px);
-      padding:0!important;
-      border:0!important;
-      height:1px!important;
-      width:1px!important;
-      overflow:hidden
+      position: absolute !important;
+      clip: rect(1px 1px 1px 1px);
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 0 !important;
+      border: 0 !important;
+      height: 1px !important;
+      width: 1px !important;
+      overflow: hidden
     }
+
     body {
-      font-family: roboto,serif,tahoma;
+      font-family: roboto, serif, tahoma;
     }
+
     .timer {
       /*border:2px solid green;*/
 
@@ -32,9 +33,11 @@
       font-size: 125%;
       flex-wrap: wrap;
     }
+
     .head {
       width: 100%;
     }
+
     .timer__column {
       padding: 5%;
       /*border:2px solid rgba(132,231,0,1);*/
@@ -50,11 +53,13 @@
       /*align-self: center;*/
       font-size: 2.5em;
     }
+
     .fz {
       font-size: 600%;
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -98,65 +103,134 @@
 
   </header>
 
-  <script >
+  <script>
 
+    TimeForKey = new Date(2020, 6, 15, 22, 13, 15, 0);
+    TimeForPrint = new Date(2020, 6, 15, 22, 41, 50, 0);
+    TimeEnd = new Date(2020, 6, 15, 14, 22, 55, 0);
 
-    document.addEventListener("DOMContentLoaded",function(a){
-
-     Timer(TimeForKey);
-   });
-
-
-//timer
-// console.log('mifome')
-TimeForKey = new Date(2020, 6, 16, 9, 30, 0,  0);
-TimeForPrint = new Date(2020, 6, 16, 9, 10, 0,  0);
-TimeEnd = new Date(2020, 6, 16,14, 14, 11, 0);
-console.log('TimeEnd-TimeForPrint' + (TimeEnd-TimeForPrint))
-console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
-
- // time = new Date(year, month, date hours, minutes, seconds, ms)
-
- function Timer(TimeStart) {
-  today = new Date();
-  // console.log('today ' + today)
-  today = Math.floor((TimeStart-today)/1000);
-  if (today<1) {
-    return true;
-  } else {
-
-    tsec=today%60;
-    console.log((TimeStart-today)%60000 + 'mifomen')
-    today=Math.floor(today/60); 
-//   console.log('today' + today)
-  // if(tsec<10)tsec='0'+tsec;
-  tmin=today%60;
-  today=Math.floor(today/60);
-
-  // if(tmin<10)tmin='0'+tmin;
-  thour=today%24; 
-  today=Math.floor(today/24);
-    // console.log('TimeStart-today)%60' + ((TimeStart-today)%60))
-    if ((TimeStart-today)%60==0) {
-      document.querySelector('.first-collum').classList.add('vh')
-      document.querySelector('.head').classList.add('fz')
-      document.querySelectorAll('.days').forEach(element => {
-        element.classList.add('fz')
-      });
-  } else {
-
+    var todayTime = new Date();
+    var time1=TimeForKey - todayTime;
+    var time2=TimeForPrint - todayTime;
+    var time3=TimeEnd - todayTime;
+  
+   var correctTime = function (time) {
+      time = new Date();
+  time1=(TimeForKey - time) %60;
+     time2=(TimeForPrint - time);
+     time3=(TimeEnd - time);
+     console.log('time1 ' + time1)
+     // console.log('time2 ' + time2)
+     // console.log('time3 ' + time3)
+   }   
+   var reloadPage = function (Number) {
+// Math.floor(((TimeForKey - 
+   time1=(TimeForKey - time) %60;
+     time2=(TimeForPrint - time);
+     time3=(TimeEnd - time);
+     if ((time1 ==1) || (time2 == 1)  || (time3 == 1) )
+     {
+      document.location.reload(true);
+    } else {
+      console.log('time1 ' + time1)
+      console.log('time2 ' + time2)
+      console.log('time3 ' + time3)
+    }
   }
-  document.getElementById('day').innerHTML=today;
-  document.getElementById('hour').innerHTML=thour;
-  document.getElementById('min').innerHTML=tmin;
-  document.getElementById('sec').innerHTML=tsec;
-  window.setTimeout('Timer(TimeForKey)',1000);
-}
-  // if (day<0) break;
-}
+  document.addEventListener("DOMContentLoaded", function (a) {
+    // reloadPage();
+    // correctTime(today);
+    Timer();
+    setTimeout(reloadPage(),1000)
+
+  });
+
+    // if (Timer(TimeForKey)) {
+    //   Timer(TimeForPrint)
+    //   TimeForKey=TimeForPrint
+    // } else if (Timer(TimeForPrint)) {
+    //   TimeForPrint=TimeEnd
+    // }
+
+
+    // time = new Date(year, month, date hours, minutes, seconds, ms)
+
+    function Timer(TimeStart) {
+      today = new Date();
+      correctTime(today);
+      // console.log('today ' + today)
+      today = Math.floor((TimeStart - today) / 1000);
+      if (today < 1) {
+        return true;
+        // window.setTimeout('Timer(TimeForPrint)',1000)
+      } else {
+
+        tsec = today % 60;
+        // console.log((TimeStart-today)%60000 + 'mifomen')
+        today = Math.floor(today / 60);
+        //   console.log('today' + today)
+        // if(tsec<10)tsec='0'+tsec;
+        tmin = today % 60;
+        today = Math.floor(today / 60);
+
+        // if(tmin<10)tmin='0'+tmin;
+        thour = today % 24;
+        today = Math.floor(today / 24);
+        // console.log('TimeStart-today)%60' + ((TimeStart-today)%60))
+        if ((TimeStart - today) % 60 == 0) {
+          document.querySelector('.first-collum').classList.add('vh')
+          document.querySelector('.head').classList.add('fz')
+          document.querySelectorAll('.days').forEach(element => {
+            element.classList.add('fz')
+          });
+        } else {
+
+        }
+        document.getElementById('day').innerHTML = today;
+        document.getElementById('hour').innerHTML = thour;
+        document.getElementById('min').innerHTML = tmin;
+        document.getElementById('sec').innerHTML = tsec;
+
+        // var timerId = setTimeout('Timer(TimeForKey)', 1000);
+        // console.log(TimeForKey - todayTime)
+        if ((TimeForKey - todayTime) > 0) {
+          clearTimeout(timerId);
+          var timerId = setTimeout('Timer(TimeForKey)', 1000)
+
+        } else {
+          if ((TimeForKey - todayTime) < 0) {
+            // reloadPage();
+            clearTimeout(timerId);
+            var timerId = setTimeout('Timer(TimeForPrint)', 1000)
+            //  reloadPage(3)
+          } else
+          if (TimeForPrint - todayTime) {
+            clearTimeout(timerId);
+            var timerId = setTimeout('Timer(TimeForEnd)', 1000)
+              // reloadPage(3);
+            } else {
+
+            }
+            // correctTime();
+            window.setTimeout(timerId, 1000);
+             // window.setTimeout(timerId, 1000);
+             //  window.setTimeout(timerId, 1000);
+          // console.log('time1' + time1)
+        }
 
 
 
-</script>
+        // // clearTimeout(timerId);
+        // if ((TimeForKey-today)<0) (clearTimeout(timerId); window.setTimeout(timerId, 1000))
+        // else { window.setTimeout(timerId, 1000);}
+        // clearTimeout(timerId);
+      }
+      // if (day<0) break;
+    }
+
+
+
+  </script>
 </body>
+
 </html>

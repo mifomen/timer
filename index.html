@@ -59,18 +59,18 @@
 
   <header>
     <div class="timer">
-      <div class="timer__column head v">До получения ключа</div>
-      <div class="timer__column head vh">До печати</div>
-      <div class="timer__column head vh">До окончания экзамена</div>
-      <div class="timer__column days first-collum v">
+      <div class="timer__column head vh">До получения ключа</div>
+      <div class="timer__column head vh fz72px">До печати</div>
+      <div class="timer__column head v fz72px">До окончания экзамена</div>
+      <div class="timer__column days first-collum vh">
         <span id="day">
           0
         </span>
-        <span class="timer__description">
+        <span class="timer__description ">
           Дней
         </span>
       </div>
-      <div class="timer__column days">
+      <div class="timer__column days ">
         <span id="hour">
           0
         </span>
@@ -103,17 +103,17 @@
 
     document.addEventListener("DOMContentLoaded",function(a){
 
-     Timer(TimeForKey);
+     Timer();
    });
 
 
 //timer
 // console.log('mifome')
 TimeForKey = new Date(2020, 6, 16, 9, 30, 0,  0);
-TimeForPrint = new Date(2020, 6, 16, 9, 10, 0,  0);
-TimeEnd = new Date(2020, 6, 16,14, 14, 11, 0);
-console.log('TimeEnd-TimeForPrint' + (TimeEnd-TimeForPrint))
-console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
+TimeForPrint = new Date(2020, 6, 16, 10, 0, 0,  0);
+TimeEnd = new Date(2020, 6, 16,14, 14, 13, 0);
+// console.log('TimeEnd-TimeForPrint' + (TimeEnd-TimeForPrint))
+// console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
 
  // time = new Date(year, month, date hours, minutes, seconds, ms)
 
@@ -126,7 +126,7 @@ console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
   } else {
     
     tsec=today%60;
-    console.log((TimeStart-today)%60000 + 'mifomen')
+    // console.log((TimeStart-today)%60000 + 'mifomen')
     today=Math.floor(today/60); 
 //   console.log('today' + today)
   // if(tsec<10)tsec='0'+tsec;
@@ -159,7 +159,7 @@ console.log('TimeForPrint-timeend' + (TimeEnd-TimeForPrint))
   document.getElementById('hour').innerHTML=thour;
   document.getElementById('min').innerHTML=tmin;
   document.getElementById('sec').innerHTML=tsec;
-  window.setTimeout("Timer(TimeForKey)",1000);
+  window.setTimeout("Timer(TimeEnd)",1000);
 }
   // if (day<0) break;
 }

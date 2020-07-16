@@ -4,7 +4,7 @@
   "description": "none",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "test"
+    "test": "npm gulp"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/mifomen/timer#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0"
   }
 }

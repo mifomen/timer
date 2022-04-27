@@ -1,0 +1,11 @@
+{
+  "extends":[
+    "stylelint-config-htmlacademy"
+  ],
+  "rules": {
+    "selector-type-no-unknown": "custom-elements",
+    "function-calc-no-invalid": "false",
+    "declaration-no-important": true,
+    "indentation": [2, {"ignore": ["inside-parens"]}]
+  }
+}

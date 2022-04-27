@@ -2,10 +2,6 @@
   "name": "timer",
   "version": "1.0.0",
   "description": "none",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "npm gulp"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mifomen/timer.git"
@@ -20,8 +16,27 @@
   },
   "homepage": "https://github.com/mifomen/timer#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0"
+    "@htmlacademy/editorconfig-cli": "^1.0.0",
+    "browser-sync": "2.26.14",
+    "eslint": "7.18.0",
+    "eslint-config-htmlacademy": "4.1.0",
+    "stylelint": "^14.5.3",
+    "stylelint-config-htmlacademy": "^0.1.12"
+  },
+  "scripts": {
+    "editorconfig": "editorconfig-cli",
+    "stylelint": "stylelint \"src/css/**/*.css\"",
+    "start2": "browser-sync start --server --no-notify --no-ui --ss \"src\" --files \"./**/*.*\" --browser \"google-chrome\"",
+    "test": "eslint src/ && npm run editorconfig && npm run stylelint",
+    "start": "browser-sync --config bs-config.js"
+    },
+  "editorconfig-cli": [
+    "src/**/*.json",
+    "src/**/*.js",
+    "src/**/*.css"
+  ],
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   }
 }

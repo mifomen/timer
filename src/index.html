@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>EGE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="css/style.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="icon" type="image/png" href="img/tildafavicon.ico">
+  <link rel="icon"
+  type="image/png"
+  href="img/tildafavicon.ico">
   <style>
     .vh {
-      position: absolute !important;
-      clip: rect(1px 1px 1px 1px);
-      clip: rect(1px, 1px, 1px, 1px);
-      padding: 0 !important;
-      border: 0 !important;
-      height: 1px !important;
-      width: 1px !important;
-      overflow: hidden
+      position:absolute!important;
+      clip:rect(1px 1px 1px 1px);
+      clip:  rect(1px,1px,1px,1px);
+      padding:0!important;
+      border:0!important;
+      height:1px!important;
+      width:1px!important;
+      overflow:hidden
     }
-
     body {
-      font-family: roboto, serif, tahoma;
+      font-family: roboto,serif,tahoma;
     }
-
     .timer {
       /*border:2px solid green;*/
 
@@ -32,12 +31,15 @@
       padding: 5%;
       font-size: 125%;
       flex-wrap: wrap;
+      /* color: white;
+       text-shadow: 1px 1px 1px #000000,
+       1px -1px 1px #000000,
+       -1px 1px 1px #000000,
+       -1px -1px 1px #000000; */
     }
-
     .head {
       width: 100%;
     }
-
     .timer__column {
       padding: 5%;
       /*border:2px solid rgba(132,231,0,1);*/
@@ -53,33 +55,69 @@
       /*align-self: center;*/
       font-size: 2.5em;
     }
-
-    .fz {
-      font-size: 600%;
+    .fz72px {
+      font-size: 104px;
     }
+     .now-time {
+       font-size: 78px;
+       width: 100%;
+       text-align: center;
+       /* color: white;
+       text-shadow: 1px 1px 1px #000000,
+       1px -1px 1px #000000,
+       -1px 1px 1px #000000,
+       -1px -1px 1px #000000; */
+
+     }
+
+     body {
+    /* background: linear-gradient(253deg, #4775c1,  #2115c1,#18427d); */
+    background-size: 400% 400%;
+
+
+    animation: AnimationName 10s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:52% 0%}
+    50%{background-position:49% 100%}
+    100%{background-position:52% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:52% 0%}
+    50%{background-position:49% 100%}
+    100%{background-position:52% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:52% 0%}
+    50%{background-position:49% 100%}
+    100%{background-position:52% 0%}
+}
   </style>
 </head>
-
 <body>
 
   <header>
     <div class="timer">
-      <div class="timer__column head v">До получения ключа</div>
-      <div class="timer__column head vh">До печати</div>
-      <div class="timer__column head vh">До окончания экзамена</div>
+      <div class="js-now-date now-time">123</div>
+      <div class="js-now-time now-time">123</div>
+
+      <div class="name timer__column head v fz72px"><p style="text-align:center;">До следующего экзамена</p></div>
+      <div class="timer__column head vh fz72px">До печати</div>
+      <div class="timer__column head vh fz72px">До окончания экзамена</div>
       <div class="timer__column days first-collum v">
-        <span id="day">
+        <span id="day" class="timer__day">
           0
         </span>
-        <span class="timer__description">
+        <span class="timer__column timer__column--day timer__description">
           Дней
         </span>
       </div>
-      <div class="timer__column days">
+      <div class="timer__column days timer__column--hour">
         <span id="hour">
           0
         </span>
-        <span class="timer__description">
+        <span class="time-name-hours timer__description">
           Часов
         </span>
       </div>
@@ -103,81 +141,83 @@
 
   </header>
 
-  <script>
-    'user strict'
-    // time = new Date(year, month, date hours, minutes, seconds, ms)
-    TimeForKey = new Date(2020, 6, 16, 11, 13, 35, 0);
-    TimeForPrint = new Date(2020, 6, 16, 11, 14, 15, 0);
-    TimeEnd = new Date(2020, 6, 15, 16, 11, 46, 0);
+  <script >
+
+
+    document.addEventListener("DOMContentLoaded",function(a){
+
+     Timer();
+   });
+
+
+//timer
+// console.log('mifome')
 
 
 
+document.querySelector('.name').textContent="До получения ключа";
+document.querySelector('.name').textContent="До начала экзамена";
 
-    document.addEventListener("DOMContentLoaded", function (a) {
+if (new Date().getHours>=8 && new Date().getHours<=10 && new Date().getMinutes>=1 && new Date().getMinutes>= 59) {
+}
+document.querySelector('.name').textContent="До завершения экзамена";
+if (new Date().getHours>=10 && new Date().getHours<=14) {
 
-      Timer();
-    // setTimeout(reloadPage(),1000)
+}
 
-  });
+document.querySelector('.time-name-hours').textContent="Час";
+TimeForKey = new Date(2020, 3, 27, 9, 30, 0,  0);
+TimeForPrint = new Date(2020, 3, 27, 10, 0, 0,  0);
+timeEnd = new Date(2022, 3, 27, 14, 03, 0, 0); //редактируй ее
+console.log(`timeEnd=${timeEnd}`)
 
-
-// var tsec, tmin,thour;
-var TimeStart;
-
-function Timer() {
+ function Timer(TimeStart) {
   today = new Date();
-  nowtime  = new Date();
-
-
- 
-
-  // console.log('today ' + today)
+  console.log(`today=${today}`)
   today = Math.floor((TimeStart-today)/1000);
   if (today<1) {
-    // return true;
+    return true;
   } else {
-    tsec=today%60;
-    // console.log((TimeStart-today)%60000 + 'mifomen')
-    today=Math.floor(today/60); 
-//   console.log('today' + today)
-  // if(tsec<10)tsec='0'+tsec;
+
+  tsec=today%60;
+  today=Math.floor(today/60);
   tmin=today%60;
   today=Math.floor(today/60);
-  
-  // if(tmin<10)tmin='0'+tmin;
-  thour=today%24; 
-  today=Math.floor(today/24);
-    // console.log('TimeStart-today)%60' + ((TimeStart-today)%60))
-    if ((TimeForKey-nowtime)<0) {
-      document.querySelector('.first-collum').classList.add('vh')
-    // document.querySelectorAll('.timer__column').style.fontSize = "148px";
 
-    // document.querySelectorAll('.days').classList.add('fz72px')
-    // for (i=0;i<=3;i++) {
-    //     document.querySelectorAll('.days')[i].classList.add('fz72px')
-    // }
+  thour=today%24;
+  today=Math.floor(today/24);
+    if ((TimeStart-today)%60==0) {
+      document.querySelector('.first-collum').classList.add('vh')
     document.querySelectorAll('.days').forEach(element => {
       element.classList.add('fz72px')
-      
-    });
-    // for (i=0;i<=document.querySelectorAll('.days').length;i++) {
-// listdays[i].classList.add('fz72px")
-    // })
-  } else {
 
+    });
   }
   document.getElementById('day').innerHTML=today;
+
+  if (true) {
+    // document.querySelector('.timer__day').classList.add('vh');
+    // document.querySelector('.first-collum').classList.add('vh');
+
+  }
   document.getElementById('hour').innerHTML=thour;
+
+  if (thour === 0) {
+    document.querySelector('.timer__column--hour').classList.add('vh')
+  }
   document.getElementById('min').innerHTML=tmin;
   document.getElementById('sec').innerHTML=tsec;
-  window.setTimeout("Timer()",1000);
+  window.setTimeout("Timer(timeEnd)",1000);
 }
-  // if (day<0) break;
 }
 
+const timerId = setInterval(() => {
+  const nowTimeTime = document.querySelector('.js-now-time');
+  nowTimeTime.innerHTML=`${new Date().toLocaleTimeString()}`;
 
-
+  const nowTimeDate = document.querySelector('.js-now-date');
+  nowTimeDate.innerHTML=`${new Date().toLocaleDateString()}`;
+}, 1000);
 </script>
 </body>
-
 </html>

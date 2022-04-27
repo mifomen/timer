@@ -5,24 +5,14 @@
   <title>EGE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="css/style.css"> -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="icon"
   type="image/png"
   href="img/tildafavicon.ico">
   <style>
     .vh {
-      position:absolute!important;
-      clip:rect(1px 1px 1px 1px);
-      clip:  rect(1px,1px,1px,1px);
-      padding:0!important;
-      border:0!important;
-      height:1px!important;
-      width:1px!important;
-      overflow:hidden
+      display: none !important;
     }
-    body {
-      font-family: roboto,serif,tahoma;
-    }
+
     .timer {
       /*border:2px solid green;*/
 
@@ -32,21 +22,16 @@
       font-size: 125%;
       flex-wrap: wrap;
       /* color: white;
-       text-shadow: 1px 1px 1px #000000,
-       1px -1px 1px #000000,
-       -1px 1px 1px #000000,
-       -1px -1px 1px #000000; */
+        text-shadow: 1px 1px 1px #000000,
+        1px -1px 1px #000000,
+        -1px 1px 1px #000000,
+        -1px -1px 1px #000000; */
     }
     .head {
       width: 100%;
     }
     .timer__column {
       padding: 5%;
-      /*border:2px solid rgba(132,231,0,1);*/
-      display: -webkit-flex;
-      display: -moz-flex;
-      display: -ms-flex;
-      display: -o-flex;
       display: flex;
       flex-direction: column;
       align-content: center;
@@ -58,166 +43,201 @@
     .fz72px {
       font-size: 104px;
     }
-     .now-time {
-       font-size: 78px;
-       width: 100%;
-       text-align: center;
-       /* color: white;
-       text-shadow: 1px 1px 1px #000000,
-       1px -1px 1px #000000,
-       -1px 1px 1px #000000,
-       -1px -1px 1px #000000; */
+    .current-time {
+      font-size: 78px;
+      width: 100%;
+      text-align: center;
+      /* color: white;
+      text-shadow: 1px 1px 1px #000000,
+      1px -1px 1px #000000,
+      -1px 1px 1px #000000,
+      -1px -1px 1px #000000; */
+    }
 
-     }
+    body {
+      /* background: linear-gradient(253deg, #4775c1,  #2115c1,#18427d); */
+      background-size: 400% 400%;
+      animation: AnimationName 10s ease infinite;
+    }
 
-     body {
-    /* background: linear-gradient(253deg, #4775c1,  #2115c1,#18427d); */
-    background-size: 400% 400%;
-
-
-    animation: AnimationName 10s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-    0%{background-position:52% 0%}
-    50%{background-position:49% 100%}
-    100%{background-position:52% 0%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:52% 0%}
-    50%{background-position:49% 100%}
-    100%{background-position:52% 0%}
-}
-@keyframes AnimationName {
-    0%{background-position:52% 0%}
-    50%{background-position:49% 100%}
-    100%{background-position:52% 0%}
-}
+    @-webkit-keyframes AnimationName {
+      0%{background-position:52% 0%}
+      50%{background-position:49% 100%}
+      100%{background-position:52% 0%}
+    }
+    @-moz-keyframes AnimationName {
+      0%{background-position:52% 0%}
+      50%{background-position:49% 100%}
+      100%{background-position:52% 0%}
+    }
+    @keyframes AnimationName {
+      0%{background-position:52% 0%}
+      50%{background-position:49% 100%}
+      100%{background-position:52% 0%}
+    }
+    .timer__title {
+      text-align: center;
+    }
   </style>
 </head>
-<body>
-
-  <header>
+<body class="page__body">
+  <header class="page__body-header">
     <div class="timer">
-      <div class="js-now-date now-time">123</div>
-      <div class="js-now-time now-time">123</div>
-
-      <div class="name timer__column head v fz72px"><p style="text-align:center;">До следующего экзамена</p></div>
-      <div class="timer__column head vh fz72px">До печати</div>
-      <div class="timer__column head vh fz72px">До окончания экзамена</div>
+      <div class="js-current-date current-time">123</div>
+      <div class="js-current-time current-time">123</div>
+      <div class="timer__title timer__column head v fz72px"><p style="text-align:center;">До следующего экзамена</p></div>
+      <!-- <div class="timer__column head vh fz72px">До печати</div>
+      <div class="timer__column head vh fz72px">До окончания экзамена</div> -->
       <div class="timer__column days first-collum v">
-        <span id="day" class="timer__day">
-          0
-        </span>
-        <span class="timer__column timer__column--day timer__description">
-          Дней
-        </span>
+        <span id="day" class="timer__day">0</span>
+        <span class="timer__column timer__column--day timer__description">Дней</span>
       </div>
       <div class="timer__column days timer__column--hour">
-        <span id="hour">
-          0
-        </span>
-        <span class="time-name-hours timer__description">
-          Часов
-        </span>
+        <span id="hour">0</span>
+        <span class="time-name-hours timer__description">Часов</span>
       </div>
       <div class="timer__column days">
-        <span id="min">
-          0
-        </span>
-        <span class="timer__description">
-          Минут
-        </span>
+        <span id="min">0</span>
+        <span class="timer__description timer__description-min">Минут</span>
       </div>
       <div class="timer__column days">
-        <span id="sec">
-          0
-        </span>
-        <span class="timer__description">
-          Секунд
-        </span>
+        <span id="sec">0</span>
+        <span class="timer__description timer__description-sec">Секунд</span>
       </div>
     </section>
-
   </header>
+  <script>
+    const setHourName = (intInput) => {
 
-  <script >
+      const lastCiftIntInpit = intInput % 10;
+      if (lastCiftIntInpit === 1 ) {
+        return 'Час';
+      }
+      if (lastCiftIntInpit >=2 && lastCiftIntInpit <= 4 ) {
+        return 'Часа';
+      }
+      if (intInput === 0 || intInput >=5 && intInput <= 20 ) {
+        return 'Часов';
+      }
+    }
+
+    const setMinName = (intInput) => {
+      if (intInput === 1) {
+        return 'минута';
+      }
+      if (intInput ===0 || intInput >= 5 && intInput <= 59 ) {
+        return 'минут';
+      }
+      if (intInput >= 2 && intInput <= 4 ) {
+        return 'минуты';
+      }
+    }
+
+    const setSecName = (intInput) => {
+      if (intInput === 1) {
+        return 'секунда';
+      }
+      if (intInput ===0 || intInput >= 5 && intInput <= 59 ) {
+        return 'секунд';
+      }
+      if (intInput >= 2 && intInput <= 4 ) {
+        return 'секунды';
+      }
+    }
 
 
-    document.addEventListener("DOMContentLoaded",function(a){
-
-     Timer();
-   });
+   const nowTime = new Date();
 
 
-//timer
-// console.log('mifome')
+   const setNameStepExam = (inputTime) => {
+   const timerTitle = document.querySelector('.timer__title');
 
+   const getHours = inputTime.getHours;
+   const getMin = inputTime.getMinutes;
+    if ( getHours >= 18 && getHours <= 19 && getMin >= 31 && getMin<= 59 ) {
+      timerTitle.textContent="До начала экзамена";
+      console.log('true1')
+      return "До начала экзамена";
+    }
 
+    if ( getHours >= 18 && getHours<=19 && getMin>= 0 && getMin <= 30 ) {
+      timerTitle.textContent="До получения ключа";
+      console.log('true2')
+      return "До получения ключа";
+    }
+    if ( inputTime.getHours >= 10 && inputTime.getHours<=14 && getMin>= 0 && getMin <= 30 ) {
+        timerTitle.textContent="До завершения экзамена";
+        console.log('true3')
+        return "До завершения экзамена";
+    }
+  }
+  // document.querySelector('.time-name-hours').textContent=setHourName();
+  TimeForKey = new Date(2020, 3, 27, 9, 30, 0,  0);
+  TimeForPrint = new Date(2020, 3, 27, 10, 0, 0,  0);
+  timeEnd = new Date(2022, 3, 27, 24, 03, 0, 0); //редактируй ее
+  // console.log(`timeEnd=${timeEnd}`)
 
-document.querySelector('.name').textContent="До получения ключа";
-document.querySelector('.name').textContent="До начала экзамена";
+ const Timer = (TimeStart) => {
+  let today = new Date();
 
-if (new Date().getHours>=8 && new Date().getHours<=10 && new Date().getMinutes>=1 && new Date().getMinutes>= 59) {
-}
-document.querySelector('.name').textContent="До завершения экзамена";
-if (new Date().getHours>=10 && new Date().getHours<=14) {
-
-}
-
-document.querySelector('.time-name-hours').textContent="Час";
-TimeForKey = new Date(2020, 3, 27, 9, 30, 0,  0);
-TimeForPrint = new Date(2020, 3, 27, 10, 0, 0,  0);
-timeEnd = new Date(2022, 3, 27, 14, 03, 0, 0); //редактируй ее
-console.log(`timeEnd=${timeEnd}`)
-
- function Timer(TimeStart) {
-  today = new Date();
-  console.log(`today=${today}`)
+  // setNameStepExam(new Date());
+  // console.log(`setNameStepExam(today)=${setNameStepExam(new Date())}`)
   today = Math.floor((TimeStart-today)/1000);
   if (today<1) {
     return true;
   } else {
 
   tsec=today%60;
+
+  document.querySelector('.timer__description-sec').textContent=setSecName(tsec);
+
   today=Math.floor(today/60);
   tmin=today%60;
   today=Math.floor(today/60);
 
   thour=today%24;
+  document.querySelector('.time-name-hours').textContent=setHourName(thour);
+
+
   today=Math.floor(today/24);
-    if ((TimeStart-today)%60==0) {
+  document.querySelector('.timer__description-min').textContent=setMinName(tmin);
+
+    if ( (TimeStart-today) % 60 === 0) {
       document.querySelector('.first-collum').classList.add('vh')
-    document.querySelectorAll('.days').forEach(element => {
+      document.querySelectorAll('.days').forEach(element => {
       element.classList.add('fz72px')
 
     });
   }
-  document.getElementById('day').innerHTML=today;
+  document.querySelector('#day').innerHTML=today;
 
   if (true) {
     // document.querySelector('.timer__day').classList.add('vh');
     // document.querySelector('.first-collum').classList.add('vh');
 
   }
-  document.getElementById('hour').innerHTML=thour;
+  document.querySelector('#hour').innerHTML=thour;
 
   if (thour === 0) {
     document.querySelector('.timer__column--hour').classList.add('vh')
   }
-  document.getElementById('min').innerHTML=tmin;
-  document.getElementById('sec').innerHTML=tsec;
-  window.setTimeout("Timer(timeEnd)",1000);
-}
+    document.querySelector('#min').innerHTML=tmin;
+    document.querySelector('#sec').innerHTML=tsec;
+    window.setTimeout("Timer(timeEnd)",1000);
+  }
 }
 
 const timerId = setInterval(() => {
-  const nowTimeTime = document.querySelector('.js-now-time');
+  const nowTimeTime = document.querySelector('.js-current-time');
   nowTimeTime.innerHTML=`${new Date().toLocaleTimeString()}`;
 
-  const nowTimeDate = document.querySelector('.js-now-date');
+  const nowTimeDate = document.querySelector('.js-current-date');
   nowTimeDate.innerHTML=`${new Date().toLocaleDateString()}`;
 }, 1000);
+
+document.addEventListener("DOMContentLoaded",() => {
+     Timer();
+   });
 </script>
 </body>
 </html>

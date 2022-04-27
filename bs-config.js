@@ -12,21 +12,23 @@
  |
  |
  */
-module.exports = {
-  'ui': false,
-  'files': false,
+ module.exports = {
+  'ui': {
+    'port': 3000,
+  },
+  'files': ['./src/**/*.html','./src/**/*.css','./src/**/*.js','./src/**/*.json'],
   'watchEvents': [
     'change',
   ],
-  'watch': '*.*',
+  'watch': false,
   'ignore': [],
   'single': false,
-  'watchOptions': {
-    'ignoreInitial': true,
+  'watchOptions': {},
+  'server': {
+    baseDir: './src',
   },
-  'server': true,
   'proxy': false,
-  'port': 4321,
+  'port': 1234,
   'middleware': false,
   'serveStatic': [],
   'ghostMode': {
@@ -47,7 +49,7 @@ module.exports = {
   'rewriteRules': [],
   'open': 'local',
   'browser': 'default',
-  'cors': true,
+  'cors': false,
   'xip': false,
   'hostnameSuffix': false,
   'reloadOnRestart': false,
@@ -62,7 +64,7 @@ module.exports = {
   'reloadThrottle': 0,
   'plugins': [],
   'injectChanges': true,
-  'startPath': null,
+  // 'startPath': 'null',
   'minify': true,
   'host': null,
   'localOnly': false,
@@ -102,5 +104,5 @@ module.exports = {
     'gif': 'img',
     'js': 'script',
   },
-  'injectNotification': false,
+  'injectNotification': true,
 };

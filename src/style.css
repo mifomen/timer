@@ -1,0 +1,92 @@
+.vh {
+  display: none !important;
+}
+
+* {
+  border: 1px solid #000;
+  box-sizing: padding-box;
+}
+.time {
+  /*border:2px solid green;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  /* font-size: 125%;  */
+  flex-wrap: wrap;
+  /* color: white;
+  text-shadow: 1px 1px 1px #000000,
+  1px -1px 1px #000000,
+  -1px 1px 1px #000000,
+  -1px -1px 1px #000000; */
+  padding: 15px;
+  margin: 0;
+  height: 100vh;
+  box-sizing: padding-box;
+  width: 100%;
+}
+
+.time__title {
+  width: 100%;
+  font-size: 108px;
+  padding: 25px;
+  text-align: center;
+}
+
+.time-now-column {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2.5em;
+  padding: 5px;
+}
+
+.fz72px {
+  font-size: 104px;
+}
+
+.current-time {
+  font-size: 78px;
+  width: 100%;
+  text-align: center;
+  /* color: white;
+  text-shadow: 1px 1px 1px #000000,
+  1px -1px 1px #000000,
+  -1px 1px 1px #000000,
+  -1px -1px 1px #000000; */
+}
+
+.page__body {
+  /* background: linear-gradient(253deg, #737941,  #2115c1,#18427d); */
+  background-size: 400% 400%;
+  animation: AnimationName 10s ease infinite;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes AnimationName {
+  0% { background-position: 52% 0 }
+  50% { background-position: 49% 100% }
+  100% { background-position: 52% 0 }
+}
+.page__body-main {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.timer__title {
+  text-align: center;
+}
+
+.time-now {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}

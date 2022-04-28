@@ -150,35 +150,36 @@
 
 
    const setNameStepExam = (inputTime) => {
-   const timerTitle = document.querySelector('.timer__title');
-
-   const getHours = inputTime.getHours;
-   const getMin = inputTime.getMinutes;
-    if ( getHours >= 18 && getHours <= 19 && getMin >= 31 && getMin<= 59 ) {
-      timerTitle.textContent="До начала экзамена";
-      console.log('true1')
+   const getHours = inputTime.getHours();
+   const getMin = inputTime.getMinutes();
+    if ( getHours >= 9 && getHours < 10 && getMin >= 31 && getMin<= 59 ) {
       return "До начала экзамена";
     }
-
-    if ( getHours >= 18 && getHours<=19 && getMin>= 0 && getMin <= 30 ) {
-      timerTitle.textContent="До получения ключа";
-      console.log('true2')
+    if ( getHours >= 8 && getHours <= 9 && getMin>= 0 && getMin <= 30 ) {
       return "До получения ключа";
     }
-    if ( inputTime.getHours >= 10 && inputTime.getHours<=14 && getMin>= 0 && getMin <= 30 ) {
-        timerTitle.textContent="До завершения экзамена";
-        console.log('true3')
-        return "До завершения экзамена";
+    if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 21 ) {
+      return "До завершения экзамена";
     }
-  }
+
+    return "До следующего экзамена"
+   }
+
   // document.querySelector('.time-name-hours').textContent=setHourName();
   TimeForKey = new Date(2020, 3, 27, 9, 30, 0,  0);
   TimeForPrint = new Date(2020, 3, 27, 10, 0, 0,  0);
-  timeEnd = new Date(2022, 3, 27, 24, 03, 0, 0); //редактируй ее
-  // console.log(`timeEnd=${timeEnd}`)
+
+  const targetMonth = new Date();
+
+  const currentExamHour = 14;
+  const currentExamMin = 9
+
+  timeEnd = new Date(targetMonth.getFullYear(), targetMonth.getMonth(), targetMonth.getDate(), currentExamHour, currentExamMin, 0, 0); //редактируй ее
 
  const Timer = (TimeStart) => {
   let today = new Date();
+  console.log(`setNameStepExam=${setNameStepExam(today)} today=${today}`)
+    const timerTitle = document.querySelector('.timer__title').textContent = setNameStepExam(today);
 
   // setNameStepExam(new Date());
   // console.log(`setNameStepExam(today)=${setNameStepExam(new Date())}`)
@@ -211,6 +212,8 @@
   }
   document.querySelector('#day').innerHTML=today;
 
+
+
   if (true) {
     // document.querySelector('.timer__day').classList.add('vh');
     // document.querySelector('.first-collum').classList.add('vh');
@@ -223,6 +226,9 @@
   }
     document.querySelector('#min').innerHTML=tmin;
     document.querySelector('#sec').innerHTML=tsec;
+
+
+
     window.setTimeout("Timer(timeEnd)",1000);
   }
 }

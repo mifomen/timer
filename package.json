@@ -30,7 +30,7 @@
     "test": "eslint src/ && npm run editorconfig && npm run stylelint",
     "start": "browser-sync start --config bs-config.js",
     "help": "browser-sync --help"
-    },
+  },
   "editorconfig-cli": [
     "src/**/*.json",
     "src/**/*.js",

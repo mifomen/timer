@@ -35,6 +35,19 @@ const setSecName = (intInput) => {
   }
 };
 
+const setDayName = (inputTime) => {
+
+  if (inputTime === 1) {
+    return 'День';
+  }
+  if ( inputTime >= 2 && inputTime <= 4 ) {
+    return 'Дня';
+  }
+  if ( inputTime >= 5 && inputTime <= 100 ) {
+    return 'Дня';
+  }
+  return 'Дня';
+};
 
 const setNameStepExam = (inputTime) => {
   const getHours = inputTime.getHours();
@@ -85,17 +98,18 @@ const differenceTimes = (timeEnd) => {
 };
 
 const differenceDays = (timeEnd) => {
-  let today = Math.floor( ( timeEnd - new Date() / 1000));
-  return Math.floor((timeEnd-today)/1000);
+  let today = Math.floor();
+  console.log(`today=${ ( Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 60  ) % 60)  )}`);
+  return  Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 3600 ) / 24);
 };
 
 const differenceHours = (timeEnd) => {
-  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
-  return Math.floor((today / 60) % 24 );
+  // let today = Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 3600 );
+  return Math.round( (( (timeEnd -  Date.now()) / 1000 ) / 3600) % 24 );
 };
 const differenceMins = (timeEnd) => {
   let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
-  console.log(`${ Math.floor(today / ( 60 ) % 60) }`);
+  // console.log(`${ Math.floor(today / ( 60 ) % 60) }`);
   return Math.floor(today  / 60 % 60);
 };
 const differenceSeconds = (timeEnd) => {
@@ -103,9 +117,6 @@ const differenceSeconds = (timeEnd) => {
   return today % 60;
 };
 
-if (document.querySelector('.first-collum')) {
-  document.querySelector('.first-collum').classList.add('vh');
-}
 if (document.querySelector('.days')) {
   document.querySelectorAll('.days').forEach( (element) => {
     element.classList.add('fz72px');
@@ -118,6 +129,12 @@ const renderDifferenseTime = (endTime) => {
   document.querySelector('.js-time-now-hours').innerHTML=differenceHours(endTime);
   document.querySelector('.js-time-now-mins').innerHTML=differenceMins(endTime);
   document.querySelector('.js-time-now-seconds').innerHTML=differenceSeconds(endTime);
+
+  document.querySelector('.js-description-days').innerHTML=setDayName(differenceDays(endTime));
+  document.querySelector('.js-description-hours').innerHTML=setHourName(differenceHours(endTime));
+  document.querySelector('.js-description-mins').innerHTML=setMinName(differenceMins(endTime));
+  document.querySelector('.js-description-secs').innerHTML=setSecName(differenceSeconds(endTime));
+
 }
 
 

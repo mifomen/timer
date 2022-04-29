@@ -12,7 +12,9 @@ const targetDate = new Date();
 
 const currentExamHour = 14;
 const currentExamMin = 9;
-const timeEnd = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate()+2, currentExamHour, currentExamMin, 0, 0); //редактируй ее
+const timeEnd = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), currentExamHour, currentExamMin, 0, 0); //редактируй ее
+
+console.log(`timeEnd=${timeEnd}`)
 // console.log(`timeEnd=${timeEnd}`)
 // console.log(`differenceHours(timeEnd)=${differenceHours(timeEnd)}`);
 

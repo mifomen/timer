@@ -118,7 +118,7 @@ const renderDifferenseTime = (endingExamsTime) => {
     document.querySelector('.js-description-days').innerHTML  = setDayName(differenceDays);
   }
   // console.log(`${parseInt(document.querySelector('.js-time-now-hours').textContent,10),10)}`)
-  if ( parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-days').textContent,10) === 0 && parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0 ) {
     hideElement('.column-hours');
   } else {
     const differenceHours = Math.floor(( defferenceInTime / 3600 ) % 24 );
@@ -126,7 +126,7 @@ const renderDifferenseTime = (endingExamsTime) => {
     document.querySelector('.js-description-hours').innerHTML = setHourName(differenceHours);
   }
 
-  if ( parseInt(document.querySelector('.js-time-now-mins').textContent,10)  === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0  && parseInt(document.querySelector('.js-time-now-mins').textContent,10)  === 0 ) {
     hideElement('.column-mins');
   } else {
     const differenceMins = Math.floor(( defferenceInTime / 60  ) % 60 );

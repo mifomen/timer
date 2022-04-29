@@ -1,3 +1,5 @@
+const PARSE_INT = 10;
+
 const setHourName = (intInput) => {
   // const lastCiftIntInpit = intInput % 10;
   if (intInput === 1 || intInput === 21 ) {
@@ -110,15 +112,15 @@ const renderDifferenseTime = (endingExamsTime) => {
 
   const defferenceInTime = ( endingExamsTime -  currentTime) / 1000 ;
 
-  if ( parseInt(document.querySelector('.js-time-now-days').textContent,10) === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-days').textContent,PARSE_INT) === 0 ) {
     hideElement('.column-days');
   } else {
     const differenceDays = Math.floor(( defferenceInTime / 3600 ) / 24 );
     document.querySelector('.js-time-now-days').innerHTML    = differenceDays;
     document.querySelector('.js-description-days').innerHTML  = setDayName(differenceDays);
   }
-  // console.log(`${parseInt(document.querySelector('.js-time-now-hours').textContent,10),10)}`)
-  if ( parseInt(document.querySelector('.js-time-now-days').textContent,10) === 0 && parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0 ) {
+
+  if ( parseInt(document.querySelector('.js-time-now-days').textContent,PARSE_INT) === 0 && parseInt(document.querySelector('.js-time-now-hours').textContent,PARSE_INT) === 0 ) {
     hideElement('.column-hours');
   } else {
     const differenceHours = Math.floor(( defferenceInTime / 3600 ) % 24 );
@@ -126,7 +128,7 @@ const renderDifferenseTime = (endingExamsTime) => {
     document.querySelector('.js-description-hours').innerHTML = setHourName(differenceHours);
   }
 
-  if ( parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0  && parseInt(document.querySelector('.js-time-now-mins').textContent,10)  === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-hours').textContent,PARSE_INT) === 0  && parseInt(document.querySelector('.js-time-now-mins').textContent,PARSE_INT)  === 0 ) {
     hideElement('.column-mins');
   } else {
     const differenceMins = Math.floor(( defferenceInTime / 60  ) % 60 );
@@ -140,3 +142,13 @@ const renderDifferenseTime = (endingExamsTime) => {
 
 
 export { setSecName, setMinName, setHourName,renderDifferenseTime, setTimeForExams };
+
+
+const timeNaming = {
+  getKeyForExamsHour: 9,
+  getKeyForExamsMins: 30,
+  startExamsHour: 10,
+  startExamsMin: 0,
+}
+
+console.log(timeNaming.getKeyForExamsHour)

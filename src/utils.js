@@ -13,30 +13,29 @@ const setHourName = (intInput) => {
 
 const setMinName = (intInput) => {
   if (intInput === 1) {
-    return 'минута';
+    return 'Минута';
   }
   if (intInput ===0 || intInput >= 5 && intInput <= 59 ) {
-    return 'минут';
+    return 'Минут';
   }
   if (intInput >= 2 && intInput <= 4 ) {
-    return 'минуты';
+    return 'Минуты';
   }
 };
 
 const setSecName = (intInput) => {
   if (intInput === 1) {
-    return 'секунда';
+    return 'Секунда';
   }
   if (intInput ===0 || intInput >= 5 && intInput <= 59 ) {
-    return 'секунд';
+    return 'Секунд';
   }
   if (intInput >= 2 && intInput <= 4 ) {
-    return 'секунды';
+    return 'Секунды';
   }
 };
 
 const setDayName = (inputTime) => {
-
   if (inputTime === 1) {
     return 'День';
   }
@@ -52,90 +51,99 @@ const setDayName = (inputTime) => {
 const setNameStepExam = (inputTime) => {
   const getHours = inputTime.getHours();
   const getMin = inputTime.getMinutes();
-  if ( getHours >= 9 && getHours < 10 && getMin >= 31 && getMin<= 59 ) {
+
+  if ( getHours === 9 && getMin >= 31 && getMin<= 59 ) {
     return 'До начала экзамена';
   }
   if ( getHours >= 8 && getHours <= 9 && getMin>= 0 && getMin <= 30 ) {
     return 'До получения ключа';
   }
-  if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 21 ) {
+  if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 59 ) {
     return 'До завершения экзамена';
   }
   return 'До следующего экзамена';
 };
 
-// document.querySelector('.timer__title').textContent = setNameStepExam(today);
-// document.querySelector('.timer__description-sec').textContent=setSecName(tsec);
-// document.querySelector('.time-name-hours').textContent=setHourName(thour);
-// document.querySelector('.timer__description-min').textContent=setMinName(tmin);
+const hideElement = (selector) => {
+  if (document.querySelector(selector)) {
+    document.querySelector(selector).classList.add('vh');
+  }
+};
+const setTimeForExams = (hour,min) => {
 
-const differenceTimes = (timeEnd) => {
-  let today = new Date();
-  console.log(`setNameStepExam=${setNameStepExam(today)} today=${today}`); //eslint-disable-line
-  today = Math.floor((timeEnd-today)/1000);
-  if (today < 1) {
-    return true;
+  // const currentExamHour = hour; //change it is final hour to final exams
+  // const currentExamMin = min; //change it is final minutes to final exams
+
+  const targetDate = new Date();
+  const getHours = targetDate.getHours();
+  const getMin = targetDate.getMinutes();
+
+  if ( getHours === 9 && getMin >= 31 && getMin<= 59 ) {
+    const TimeForPrint = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 10, 0, 0,  0 );
+    return TimeForPrint;
+  }
+  if ( getHours >= 4 && getHours <= 9 && getMin>= 1 && getMin <= 30 ) {
+    const TimeForKey = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 9, 30, 0,  0 );
+    return TimeForKey;
+  }
+  if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 59 ) {
+    const timeEnding = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), hour, min, 0, 0);
+    return timeEnding;
+  }
+  return  new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate()+1, 10, 0, 0, 0);
+};
+
+const renderDifferenseTime = (endingExamsTime) => {
+
+  const currentTime = new Date();
+  if ( endingExamsTime < currentTime) {
+    endingExamsTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate()+1, currentTime.getHours(), currentTime.getMinutes(), 0, 0);
   }
 
-  const tsec=today % 60;
-  today=Math.floor(today / 60);
-  const tmin=today % 60;
-  today=Math.floor(today / 60);;
-  const thour=today % 24;
-  today=Math.floor(today/24);
-
-  if ( (timeEnd-today) % 60 === 0) {
-
+  if (document.querySelector('.time__title').classList.contains('vh')) {
+    document.querySelector('.time__title').classList.remove('vh');
   }
-  // if (true) {
-  // document.querySelector('.timer__day').classList.add('vh');
-  // document.querySelector('.first-collum').classList.add('vh');
-  // }
-  if (thour === 0) {
-    document.querySelector('.timer__column--hour').classList.add('vh');
+
+  const titleExams = document.querySelector('.time__title');
+  titleExams.textContent = setNameStepExam(currentTime);
+
+  const defferenceInTime = ( endingExamsTime -  currentTime) / 1000 ;
+
+  if ( document.querySelector('.js-time-now-days').textContent === 0 ) {
+    hideElement('.column-days');
+  } else {
+    const differenceDays    =  Math.floor(( defferenceInTime / 3600 ) / 24 );
+    document.querySelector('.js-time-now-days').innerHTML    = differenceDays;
+    document.querySelector('.js-description-days').innerHTML  = setDayName(differenceDays);
   }
-  // window.setTimeout(differenceTimes(timeEnd),10000);
+
+  // console.log(`${parseInt(document.querySelector('.js-time-now-hours').textContent,10)}`)
+
+  if ( document.querySelector('.js-time-now-hours').textContent === 0 ) {
+    hideElement('.column-hours');
+  } else {
+    const differenceHours   =  Math.floor(( defferenceInTime / 3600 ) % 24 );
+    document.querySelector('.js-time-now-hours').innerHTML   = differenceHours;
+    document.querySelector('.js-description-hours').innerHTML = setHourName(differenceHours);
+  }
+
+  if ( document.querySelector('.js-time-now-mins').textContent  === 0 ) {
+    hideElement('.column-mins');
+  } else {
+    const differenceMins = Math.floor(( defferenceInTime / 60  ) % 60 );
+    document.querySelector('.js-time-now-mins').innerHTML = differenceMins;
+    document.querySelector('.js-description-mins').innerHTML = setMinName(differenceMins);
+  }
+
+  if ( document.querySelector('.js-time-now-seconds').textContent  === 0 ) {
+    hideElement('.column-seconds');
+  } else {
+    const differenceSeconds =  Math.floor( defferenceInTime % 60 );
+    document.querySelector('.js-time-now-seconds').innerHTML = differenceSeconds;
+    document.querySelector('.js-description-seconds').innerHTML  = setSecName(differenceSeconds);
+  }
+
 };
 
-const differenceDays = (timeEnd) => {
-  let today = Math.floor();
-  console.log(`today=${ ( Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 60  ) % 60)  )}`);
-  return  Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 3600 ) / 24);
-};
 
-const differenceHours = (timeEnd) => {
-  // let today = Math.round(( ( (timeEnd -  Date.now()) / 1000 ) / 3600 );
-  return Math.round( (( (timeEnd -  Date.now()) / 1000 ) / 3600) % 24 );
-};
-const differenceMins = (timeEnd) => {
-  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
-  // console.log(`${ Math.floor(today / ( 60 ) % 60) }`);
-  return Math.floor(today  / 60 % 60);
-};
-const differenceSeconds = (timeEnd) => {
-  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
-  return today % 60;
-};
-
-if (document.querySelector('.days')) {
-  document.querySelectorAll('.days').forEach( (element) => {
-    element.classList.add('fz72px');
-  });
-
-}
-
-const renderDifferenseTime = (endTime) => {
-  document.querySelector('.js-time-now-days').innerHTML= differenceDays(endTime);
-  document.querySelector('.js-time-now-hours').innerHTML=differenceHours(endTime);
-  document.querySelector('.js-time-now-mins').innerHTML=differenceMins(endTime);
-  document.querySelector('.js-time-now-seconds').innerHTML=differenceSeconds(endTime);
-
-  document.querySelector('.js-description-days').innerHTML=setDayName(differenceDays(endTime));
-  document.querySelector('.js-description-hours').innerHTML=setHourName(differenceHours(endTime));
-  document.querySelector('.js-description-mins').innerHTML=setMinName(differenceMins(endTime));
-  document.querySelector('.js-description-secs').innerHTML=setSecName(differenceSeconds(endTime));
-
-}
-
-
-export { setSecName, setMinName, setHourName, differenceHours, differenceTimes,renderDifferenseTime };
+export { setSecName, setMinName, setHourName,renderDifferenseTime, setTimeForExams };

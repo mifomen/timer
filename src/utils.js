@@ -1,9 +1,10 @@
 const setHourName = (intInput) => {
-  const lastCiftIntInpit = intInput % 10;
-  if (lastCiftIntInpit === 1 ) {
+  // const lastCiftIntInpit = intInput % 10;
+  if (intInput === 1 || intInput === 21 ) {
     return 'Час';
   }
-  if (lastCiftIntInpit >= 2 && lastCiftIntInpit <= 4 ) {
+  if (intInput >= 2 && intInput <= 4  || intInput >= 22  && intInput <= 24) {
+    console.log('часа')
     return 'Часа';
   }
   if (intInput === 0 || intInput >= 5 && intInput <= 20 ) {
@@ -109,40 +110,32 @@ const renderDifferenseTime = (endingExamsTime) => {
 
   const defferenceInTime = ( endingExamsTime -  currentTime) / 1000 ;
 
-  if ( document.querySelector('.js-time-now-days').textContent === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-days').textContent,10) === 0 ) {
     hideElement('.column-days');
   } else {
-    const differenceDays    =  Math.floor(( defferenceInTime / 3600 ) / 24 );
+    const differenceDays = Math.floor(( defferenceInTime / 3600 ) / 24 );
     document.querySelector('.js-time-now-days').innerHTML    = differenceDays;
     document.querySelector('.js-description-days').innerHTML  = setDayName(differenceDays);
   }
-
-  // console.log(`${parseInt(document.querySelector('.js-time-now-hours').textContent,10)}`)
-
-  if ( document.querySelector('.js-time-now-hours').textContent === 0 ) {
+  // console.log(`${parseInt(document.querySelector('.js-time-now-hours').textContent,10),10)}`)
+  if ( parseInt(document.querySelector('.js-time-now-hours').textContent,10) === 0 ) {
     hideElement('.column-hours');
   } else {
-    const differenceHours   =  Math.floor(( defferenceInTime / 3600 ) % 24 );
+    const differenceHours = Math.floor(( defferenceInTime / 3600 ) % 24 );
     document.querySelector('.js-time-now-hours').innerHTML   = differenceHours;
     document.querySelector('.js-description-hours').innerHTML = setHourName(differenceHours);
   }
 
-  if ( document.querySelector('.js-time-now-mins').textContent  === 0 ) {
+  if ( parseInt(document.querySelector('.js-time-now-mins').textContent,10)  === 0 ) {
     hideElement('.column-mins');
   } else {
     const differenceMins = Math.floor(( defferenceInTime / 60  ) % 60 );
     document.querySelector('.js-time-now-mins').innerHTML = differenceMins;
     document.querySelector('.js-description-mins').innerHTML = setMinName(differenceMins);
   }
-
-  if ( document.querySelector('.js-time-now-seconds').textContent  === 0 ) {
-    hideElement('.column-seconds');
-  } else {
     const differenceSeconds =  Math.floor( defferenceInTime % 60 );
     document.querySelector('.js-time-now-seconds').innerHTML = differenceSeconds;
     document.querySelector('.js-description-seconds').innerHTML  = setSecName(differenceSeconds);
-  }
-
 };
 
 

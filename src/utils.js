@@ -59,36 +59,48 @@ const setNameStepExam = (inputTime) => {
 const differenceTimes = (timeEnd) => {
   let today = new Date();
   console.log(`setNameStepExam=${setNameStepExam(today)} today=${today}`); //eslint-disable-line
-
-
   today = Math.floor((timeEnd-today)/1000);
   if (today < 1) {
     return true;
-  } else {
-    const tsec=today % 60;
-    today=Math.floor(today / 60);
-    const tmin=today % 60;
-    today=Math.floor(today / 60);
-    const thour=today % 24;
-    today=Math.floor(today/24);
-
-    if ( (timeEnd-today) % 60 === 0) {
-
-    }
-    document.querySelector('.js-time-now-days').innerHTML=today;
-    // if (true) {
-    // document.querySelector('.timer__day').classList.add('vh');
-    // document.querySelector('.first-collum').classList.add('vh');
-    // }
-    document.querySelector('.js-time-now-hours').innerHTML=thour;
-
-    if (thour === 0) {
-      document.querySelector('.timer__column--hour').classList.add('vh');
-    }
-    document.querySelector('.js-time-now-mins').innerHTML=tmin;
-    document.querySelector('.js-time-now-seconds').innerHTML=tsec;
-    // window.setTimeout(differenceTimes(timeEnd),10000);
   }
+
+  const tsec=today % 60;
+  today=Math.floor(today / 60);
+  const tmin=today % 60;
+  today=Math.floor(today / 60);;
+  const thour=today % 24;
+  today=Math.floor(today/24);
+
+  if ( (timeEnd-today) % 60 === 0) {
+
+  }
+  // if (true) {
+  // document.querySelector('.timer__day').classList.add('vh');
+  // document.querySelector('.first-collum').classList.add('vh');
+  // }
+  if (thour === 0) {
+    document.querySelector('.timer__column--hour').classList.add('vh');
+  }
+  // window.setTimeout(differenceTimes(timeEnd),10000);
+};
+
+const differenceDays = (timeEnd) => {
+  let today = Math.floor( ( timeEnd - new Date() / 1000));
+  return Math.floor((timeEnd-today)/1000);
+};
+
+const differenceHours = (timeEnd) => {
+  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
+  return Math.floor((today / 60) % 24 );
+};
+const differenceMins = (timeEnd) => {
+  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
+  console.log(`${ Math.floor(today / ( 60 ) % 60) }`);
+  return Math.floor(today  / 60 % 60);
+};
+const differenceSeconds = (timeEnd) => {
+  let today = Math.floor( ( timeEnd - new Date() ) / 1000 );
+  return today % 60;
 };
 
 if (document.querySelector('.first-collum')) {
@@ -101,5 +113,12 @@ if (document.querySelector('.days')) {
 
 }
 
+const renderDifferenseTime = (endTime) => {
+  document.querySelector('.js-time-now-days').innerHTML= differenceDays(endTime);
+  document.querySelector('.js-time-now-hours').innerHTML=differenceHours(endTime);
+  document.querySelector('.js-time-now-mins').innerHTML=differenceMins(endTime);
+  document.querySelector('.js-time-now-seconds').innerHTML=differenceSeconds(endTime);
+}
 
-export { setSecName, setMinName, setHourName, differenceTimes };
+
+export { setSecName, setMinName, setHourName, differenceHours, differenceTimes,renderDifferenseTime };

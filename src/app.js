@@ -1,6 +1,6 @@
 import {renderDifferenseTime,setTimeForExams } from './utils.js';
 
-const currentExamHour = 23; //change it is final hour to final exams
+const currentExamHour = 14; //change it is final hour to final exams
 const currentExamMin = 54; //change it is final minutes to final exams
 
 const timerId = setInterval(() => {

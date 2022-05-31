@@ -6,7 +6,7 @@ const setHourName = (intInput) => {
     return 'Час';
   }
   if (intInput >= 2 && intInput <= 4  || intInput >= 22  && intInput <= 24) {
-    console.log('часа')
+    // console.log('часа')
     return 'Часа';
   }
   if (intInput === 0 || intInput >= 5 && intInput <= 20 ) {
@@ -46,7 +46,7 @@ const setDayName = (inputTime) => {
     return 'Дня';
   }
   if ( inputTime >= 5 && inputTime <= 100 ) {
-    return 'Дня';
+    return 'Дней';
   }
   return 'Дня';
 };
@@ -55,16 +55,27 @@ const setNameStepExam = (inputTime) => {
   const getHours = inputTime.getHours();
   const getMin = inputTime.getMinutes();
 
-  if ( getHours === 9 && getMin >= 31 && getMin<= 59 ) {
-    return 'До начала экзамена';
+  if ( getHours >= 9 && getHours <= 10 && getMin >= 1 && getMin<= 12 ) {
+    return 'До начала экзамена и передачи стату1са';
   }
-  if ( getHours >= 8 && getHours <= 9 && getMin>= 0 && getMin <= 30 ) {
+
+  if ( getHours >= 2 && getHours <= 9 && getMin>= 0 && getMin <= 31 ) {
     return 'До получения ключа';
   }
+
+  if ( getHours >= 10 && getHours <= 15 && getMin >= 12 && getMin <= 30 ) {
+    return 'До экзамены успешно завершены и передачи статуса';
+  }
+
+  if ( getHours >= 10 && getHours <= 15 && getMin >= 0 && getMin <= 59 ) {
+    return 'До статуса материалы переданы в РЦОИ';
+  }
+
   if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 59 ) {
     return 'До завершения экзамена';
   }
-  return 'До следующего экзамена';
+
+  return 'До следующего экзамена получения ключа';
 };
 
 const hideElement = (selector) => {
@@ -81,26 +92,26 @@ const setTimeForExams = (hour,min) => {
   const getHours = targetDate.getHours();
   const getMin = targetDate.getMinutes();
 
-  if ( getHours === 9 && getMin >= 31 && getMin<= 59 ) {
+  if ( getHours >= 9 && getHours <= 10 && getMin >= 0 && getMin<= 12 ) {
     const TimeForPrint = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 10, 0, 0,  0 );
     return TimeForPrint;
   }
   if ( getHours >= 4 && getHours <= 9 && getMin>= 1 && getMin <= 30 ) {
-    const TimeForKey = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 9, 30, 0,  0 );
+    const TimeForKey = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 9, 31, 0,  0 );
     return TimeForKey;
   }
   if ( getHours >= 10 && getHours <= 14 && getMin >= 0 && getMin <= 59 ) {
     const timeEnding = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), hour, min, 0, 0);
     return timeEnding;
   }
-  return  new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate()+1, 10, 0, 0, 0);
+  return  new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate(), 10, 0, 0, 0);
 };
 
 const renderDifferenseTime = (endingExamsTime) => {
 
   const currentTime = new Date();
   if ( endingExamsTime < currentTime) {
-    endingExamsTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate()+1, currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+    endingExamsTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate()+1, 9, 30, 0, 0);
   }
 
   if (document.querySelector('.time__title').classList.contains('vh')) {
@@ -135,20 +146,28 @@ const renderDifferenseTime = (endingExamsTime) => {
     document.querySelector('.js-time-now-mins').innerHTML = differenceMins;
     document.querySelector('.js-description-mins').innerHTML = setMinName(differenceMins);
   }
-    const differenceSeconds =  Math.floor( defferenceInTime % 60 );
-    document.querySelector('.js-time-now-seconds').innerHTML = differenceSeconds;
-    document.querySelector('.js-description-seconds').innerHTML  = setSecName(differenceSeconds);
+  const differenceSeconds =  Math.floor( defferenceInTime % 60 );
+  document.querySelector('.js-time-now-seconds').innerHTML = differenceSeconds;
+  document.querySelector('.js-description-seconds').innerHTML  = setSecName(differenceSeconds);
 };
 
 
 export { setSecName, setMinName, setHourName,renderDifferenseTime, setTimeForExams };
 
 
-const timeNaming = {
-  getKeyForExamsHour: 9,
-  getKeyForExamsMins: 30,
-  startExamsHour: 10,
-  startExamsMin: 0,
-}
+const timingName = [
+  {
+    getKeyForExamsHour: 9,
+    getKeyForExamsMins: 30,
+    startExamsHour: 10,
+    startExamsMin: 0,
+  },
+  {
+    getKeyForExamsHour: 9,
+    getKeyForExamsMins: 30,
+    startExamsHour: 10,
+    startExamsMin: 0,
+  },
+];
 
-console.log(timeNaming.getKeyForExamsHour)
+// console.log(timeNaming.getKeyForExamsHour)

@@ -92,3 +92,38 @@
 .time-now-column__count-description {
   font-size: 108px;
 }
+
+.choose-time {
+  max-width: 450px;
+  min-width: 450px;
+}
+.choose-time__box {
+
+  display: flex;
+  flex-direction: column;
+}
+
+.choose-time__elem {
+  min-width: 450px;
+  font-size: 32px;
+  text-align: center;
+}
+.choose-time__box {
+  display: flex;
+  flex-direction: column;
+}
+
+.choose-time__box-elem {
+  display: flex;
+}
+
+
+.choose-time__btn{
+  min-width: 55px;
+  height: 55px;
+  font-size: 24px;
+}
+
+.choose-time__box-btn--submit {
+  width: 100%;
+}

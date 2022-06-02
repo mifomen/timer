@@ -1,15 +1,23 @@
-import {renderDifferenseTime,setTimeForExams } from './utils.js';
+import {currentExamHourFromForm,currentExamMinFromForm,renderDifferenseTime,setTimeForExams } from './utils.js';
 
-const currentExamHour = 13; //change it is final hour to final exams
-const currentExamMin = 42; //change it is final minutes to final exams
+// console.log(`${currentExamHourFromForm} ${currentExamMinFromForm}`)
 
-const timerId = setInterval(() => {
-  renderDifferenseTime(setTimeForExams(currentExamHour,currentExamMin));
-  const nowTimeTime = document.querySelector('.js-current-time');
-  nowTimeTime.innerHTML=`${new Date().toLocaleTimeString()}`;
+const currentExamHour = currentExamHourFromForm; //change it is final hour to final exams
+const currentExamMin = currentExamMinFromForm; //change it is final minutes to final exams
 
-  const nowTimeDate = document.querySelector('.js-current-date');
-  nowTimeDate.innerHTML=`${new Date().toLocaleDateString()}`;
-} , 1000);
+const startTimer = (a,b) => {
+  const timerId = setInterval(() => {
+    renderDifferenseTime(setTimeForExams(a,b));
+    const nowTimeTime = document.querySelector('.js-current-time');
+    nowTimeTime.innerHTML=`${new Date().toLocaleTimeString()}`;
 
-document.addEventListener('DOMContentLoaded',() => timerId);
+    const nowTimeDate = document.querySelector('.js-current-date');
+    nowTimeDate.innerHTML=`${new Date().toLocaleDateString()}`;
+  } , 1000);
+}
+// document.addEventListener('DOMContentLoaded',() => timerId);
+
+
+document.querySelector('.choose-time').addEventListener('click', () => {
+  startTimer(currentExamHour,currentExamMin);
+});

@@ -10,6 +10,27 @@
 </head>
 <body class="page__body">
   <main class="page__body-main">
+    <div class="choose-time">
+      <form class="choose-time__box">
+        <div class="choose-time__box-elem choose-time__box-elem--hour">
+          <button class="choose-time__btn-hours choose-time__btn-hours--minus-one">-1</button>
+          <button class="choose-time__btn-hours choose-time__btn-hours--minus-five">-2</button>
+          <input type="text" class="choose-time__elem choose-time__elem--hours" value="14" palceholder="14" type="text">
+          <button class="choose-time__btn-hours choose-time__btn-hours--plys-one">+1</button>
+          <button class="choose-time__btn-hours choose-time__btn-hours--plys-one">+2</button>
+        </div>
+        <div class="choose-time__box-elem choose-time__box-elem--mins">
+          <button class="choose-time__btn-mins choose-time__btn-mins--minus-one">-1</button>
+          <button class="choose-time__btn-mins choose-time__btn-mins--minus-five">-5</button>
+          <button class="choose-time__btn-mins choose-time__btn-mins--minus-ten">-10</button>
+          <input class="choose-time__elem choose-time__elem--mins" value="10" palceholder="10" type="text">
+          <button class="choose-time__btn-mins choose-time__btn-mins--plus-one">+1</button>
+          <button class="choose-time__btn-mins choose-time__btn-mins--plus-five">+5</button>
+          <button class="choose-time__btn-mins choose-time__btn-mins--plus-ten">+10</button>
+        </div>
+        <button class="choose-time__box-btn choose-time__box-btn--submit" type="sublimit">Ok</button>
+      </form>
+    </div>
     <div class="time">
       <span class="current-time js-current-date"></span>
       <span class="current-time js-current-time"></span>
